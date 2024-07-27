@@ -6,6 +6,15 @@ import { ChangeDetectorRef } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 
+// Define the User interface if not already defined
+interface User {
+  id: number;
+  name: string;
+  workouts: any[]; // Replace 'any' with the actual type of workouts
+  totalWorkouts: number;
+  totalMinutes: number;
+}
+
 describe('ProgressChartComponent', () => {
   let component: ProgressChartComponent;
   let fixture: ComponentFixture<ProgressChartComponent>;
@@ -20,7 +29,8 @@ describe('ProgressChartComponent', () => {
     const cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
 
     await TestBed.configureTestingModule({
-      imports: [CommonModule, MatListModule, ProgressChartComponent],
+      imports: [CommonModule, MatListModule],
+      declarations: [ProgressChartComponent],
       providers: [
         { provide: ChartService, useValue: chartServiceSpy },
         { provide: ChangeDetectorRef, useValue: cdrSpy },
@@ -30,24 +40,23 @@ describe('ProgressChartComponent', () => {
 
     fixture = TestBed.createComponent(ProgressChartComponent);
     component = fixture.componentInstance;
-    chartServiceMock = TestBed.inject(
-      ChartService
-    ) as jasmine.SpyObj<ChartService>;
-    cdr = TestBed.inject(
-      ChangeDetectorRef
-    ) as jasmine.SpyObj<ChangeDetectorRef>;
+    chartServiceMock = TestBed.inject(ChartService) as jasmine.SpyObj<ChartService>;
+    cdr = TestBed.inject(ChangeDetectorRef) as jasmine.SpyObj<ChangeDetectorRef>;
 
     // Ensure the chartRef is set before detectChanges is called
     component.chartRef = new ElementRef(document.createElement('canvas'));
-    spyOn(component, 'loadUsers').and.returnValue([
-      {
-        id: 1,
-        name: 'John Doe',
-        workouts: [],
-        totalWorkouts: 0,
-        totalMinutes: 0,
-      },
-    ]);
+
+    spyOn(component, 'loadUsers').and.callFake(() => {
+      component.users = [
+        {
+          id: 1,
+          name: 'John Doe',
+          workouts: [],
+          totalWorkouts: 0,
+          totalMinutes: 0,
+        },
+      ];
+    });
 
     fixture.detectChanges();
   });
@@ -70,7 +79,7 @@ describe('ProgressChartComponent', () => {
   });
 
   it('should load users from localStorage', () => {
-    const mockUsers = [
+    const mockUsers: User[] = [
       {
         id: 1,
         name: 'John Doe',
@@ -80,13 +89,14 @@ describe('ProgressChartComponent', () => {
       },
     ];
     localStorage.setItem('workoutData', JSON.stringify(mockUsers));
-    const users = component.loadUsers();
+
+    const users: User[] = component.loadUsers();
     expect(users?.length).toBe(1);
     expect(users?.[0].name).toBe('John Doe');
   });
 
   it('should select user and update chart', () => {
-    const user = {
+    const user: User = {
       id: 1,
       name: 'John Doe',
       workouts: [],
