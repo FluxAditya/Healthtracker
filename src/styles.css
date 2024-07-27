@@ -11,6 +11,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: rgb(240, 188, 188);
 }
 
 /* Scrollbar customization */
@@ -27,5 +28,5 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar);
   border-radius: 10px;
-  background-color: #000000;
+  background-color: #0a0a0a;
 }
