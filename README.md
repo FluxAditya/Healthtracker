@@ -26,10 +26,10 @@ Health Tracker is a single-page application (SPA) developed using Angular 14+. T
 
 ## Screenshots
 
-![](https://github.com/user-attachments/assets/29869083-7ea9-4844-88b0-73f10f2dd8de)
-![](https://github.com/user-attachments/assets/dddeac26-2263-4d43-b9c4-041ab0aa12aa)
-![](https://github.com/user-attachments/assets/a77a28a5-8679-487d-89fe-2ae4ecd7707f)
-![](https://github.com/user-attachments/assets/078f2294-bdf0-404a-ab82-c31338020f1a)
+![Screenshot (48)](https://github.com/user-attachments/assets/8ef03b05-fd09-4729-ba10-1c59a4ef5312)
+![Screenshot (49)](https://github.com/user-attachments/assets/df2ec0c8-efe0-4590-80fa-bf677747c704)
+![Screenshot (51)](https://github.com/user-attachments/assets/4320241d-c7ed-471e-b372-5cc62ade3856)
+![Screenshot (52)](https://github.com/user-attachments/assets/551f28c8-e21a-406e-9939-c50239467522)
 
 
 ## Getting Started
